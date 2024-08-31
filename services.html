@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Order Pickup</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body style="background-image: url('grassy-field-near-grassy-mountain-cloudy-sky.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <header>
+        <div class="logo">
+            <a href="index.html">Urban Waste-to-Energy</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="services.html">Services</a></li>
+                
+                <li><a href="about.html">About</a></li>
+                <li><a href="existing-plants.html">Existing Plants</a></li>
+                <li><a href="profile.html"><img src="Screenshot 2024-08-31 130852.png" alt="User Profile" class="user-icon"></a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <div class="pickup-container">
+        <div class="pickup-header">
+            <h1>Bulk Order Pickup</h1>
+            <p>Manage your bulk waste food pickups effortlessly with our scheduling system.</p>
+        </div>
+        <div class="pickup-content">
+            <div class="recent-activity">
+                <h2>Recent Bulk Orders</h2>
+                <p>View your recent bulk pickup orders and activity.</p>
+                <button class="view-activity-btn">View Activity</button>
+            </div>
+            <div class="book-pickup">
+                <h2>Book Your Bulk Pickup</h2>
+                <form id="bulkPickupForm">
+                    <label for="pickup-date">Select Date:</label>
+                    <input type="date" id="pickup-date" required>
+
+                    <label for="pickup-time">Select Time:</label>
+                    <input type="time" id="pickup-time" required>
+
+                    <label for="waste-quantity">Waste Quantity (in kg):</label>
+                    <!-- Set minimum quantity to 50 kg -->
+                    <input type="number" id="waste-quantity" min="50" required>
+
+                    <label for="waste-type">Type of Waste:</label>
+                    <select id="waste-type" required>
+                        <option value="Food Waste">Food Waste</option>
+                        <option value="Organic Waste">Organic Waste</option>
+                        <!-- Add more options as needed -->
+                    </select>
+
+                    <label for="additional-instructions">Additional Instructions:</label>
+                    <textarea id="additional-instructions" rows="4" placeholder="Enter any special instructions..."></textarea>
+
+                    <button type="submit" class="book-pickup-btn">Book Bulk Pickup</button>
+                </form>
+            </div>
+            <div class="booked-slots">
+                <h2>Booked Slots</h2>
+                <ul id="bookedSlotsList">
+                    <p>No bulk orders scheduled yet.</p>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('bulkPickupForm');
+            const bookedSlotsList = document.getElementById('bookedSlotsList');
+            
+            // Retrieve booked slots from local storage if available
+            const bookedSlots = JSON.parse(localStorage.getItem('bookedSlots')) || [];
+
+            // Function to display booked slots
+            function displayBookedSlots() {
+                bookedSlotsList.innerHTML = ''; // Clear previous slots
+                if (bookedSlots.length === 0) {
+                    bookedSlotsList.innerHTML = '<p>No bulk orders scheduled yet.</p>';
+                } else {
+                    bookedSlots.forEach(slot => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Date: ${slot.date}, Time: ${slot.time}, Quantity: ${slot.quantity} kg, Type: ${slot.type}`;
+                        bookedSlotsList.appendChild(listItem);
+                    });
+                }
+            }
+
+            // Display booked slots on load
+            displayBookedSlots();
+
+            // Handle form submission
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent form submission
+
+                const date = document.getElementById('pickup-date').value;
+                const time = document.getElementById('pickup-time').value;
+                const quantity = parseInt(document.getElementById('waste-quantity').value);
+                const type = document.getElementById('waste-type').value;
+                const instructions = document.getElementById('additional-instructions').value;
+
+                // Check if the quantity is at least 50 kg
+                if (quantity < 50) {
+                    alert('The minimum quantity for a bulk pickup must be at least 50 kg.');
+                    return; // Stop the submission if the condition is not met
+                }
+
+                const newSlot = { date, time, quantity, type, instructions };
+
+                // Add new slot to booked slots array
+                bookedSlots.push(newSlot);
+
+                // Store booked slots in local storage
+                localStorage.setItem('bookedSlots', JSON.stringify(bookedSlots));
+
+                // Display updated booked slots
+                displayBookedSlots();
+
+                // Clear form after submission
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

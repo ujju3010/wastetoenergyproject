@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delhi Waste-to-Energy Plants</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">Urban Waste-to-Energy</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="services.html">Services</a></li>
+                
+                <li><a href="about.html">About</a></li>
+                <li><a href="existing-plants.html">Existing Plants</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="delhi-plants">
+        <h1>Waste-to-Energy Plants in Delhi</h1>
+        <div class="location-list">
+            <!-- Okhla Plant -->
+            <div class="location-card" onclick="openModal('location1')">
+                <img src="image copy 3.png" alt="Okhla Plant" class="location-image">
+                <h2>Okhla Plant</h2>
+            </div>
+
+            <!-- Ghazipur Plant -->
+            <div class="location-card" onclick="openModal('location2')">
+                <img src="image copy 4.png" alt="Ghazipur Plant" class="location-image">
+                <h2>Ghazipur Plant</h2>
+            </div>
+
+            <div class="location-card" onclick="openModal('location2')">
+                <img src="image copy 4.png" alt="Ghazipur Plant" class="location-image">
+                <h2>Chawri Bazar Plant</h2>
+            </div>
+
+            <div class="location-card" onclick="openModal('location2')">
+                <img src="image copy 4.png" alt="Ghazipur Plant" class="location-image">
+                <h2>Greater Kailash Plant</h2>
+            </div>
+
+            <div class="location-card" onclick="openModal('location2')">
+                <img src="image copy 4.png" alt="Ghazipur Plant" class="location-image">
+                <h2>Rohini Plant</h2>
+            </div>
+
+            <!-- Add more locations as needed -->
+        </div>
+    </section>
+
+    <!-- Modal for Location 1 (Okhla) -->
+    <div id="location1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('location1')">&times;</span>
+            <h2>Okhla Plant</h2>
+            <p>Location: Okhla, Delhi</p>
+            <p>Capacity: 16 MW</p>
+            <p>Electricity Produced: <span id="electricity1">0</span> MWh</p>
+        </div>
+    </div>
+
+    <!-- Modal for Location 2 (Ghazipur) -->
+    <div id="location2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('location2')">&times;</span>
+            <h2>Ghazipur Plant</h2>
+            <p>Location: Ghazipur, Delhi</p>
+            <p>Capacity: 12 MW</p>
+            <p>Electricity Produced: <span id="electricity2">0</span> MWh</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
